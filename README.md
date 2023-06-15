@@ -27,3 +27,4 @@ Install ArgoCD in your Kubernetes cluster following this link - https://argo-cd.
 
 ## How to run!
 Follow along with my Udemy Kubernetes course lectures (GitOps Chapter) to understand how it works, detailed setup instructions, with step by step demo. My highest rated Kubernetes EKS discounted Udemy course link in www.cloudwithraj.com
+# kubernetescode
