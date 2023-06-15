@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: WebApplication1/Dockerfile
+          file: Dockerfile
           push: true
           tags: aadilraza339/udemy-argocd-webapp:${{ github.sha }}
   promote-to-dev-environment:
