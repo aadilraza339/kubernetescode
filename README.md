@@ -5,6 +5,7 @@ In this project, we will deploy a simple Python Flask API application using GitO
 ![image](https://github.com/aadilraza339/python-flask-api/assets/47937273/9f9a5ed1-4d3e-47ae-9d81-8e22cdd192ba)
 
 ### Prerequiresties
+- [Docker Hub](https://hub.docker.com/) account To push image on it 
 - EKS cluster
 - Argocd 
 - Deployment manifest file
