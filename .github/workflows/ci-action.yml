@@ -2,7 +2,6 @@ name: ci
 
 env:
   CONFIG_REPO_NAME: python-flask-deployment
-  DOCKER_HUB_USER_NAME: aadilraza339
   
 on:
   push:
@@ -40,7 +39,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ env.DOCKER_HUB_USER_NAME }}/python-flask-api:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/python-flask-api:${{ github.sha }}
   promote-to-dev-environment:
     runs-on: ubuntu-latest
     needs: docker-build-push
@@ -54,7 +53,7 @@ jobs:
           echo "checkout main branch"
           git checkout main
           echo "updating image tag in values file"
-          sed -i "s,image:.*,image:\ ${DOCKER_HUB_USER_NAME}/python-flask-api:${{ github.sha }}," deployment.yaml
+          sed -i "s,image:.*,image:\ ${secrets.DOCKERHUB_USERNAME}/python-flask-api:${{ github.sha }}," deployment.yaml
           git add . && git commit -m "update image tag"
           git push
   
