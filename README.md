@@ -40,6 +40,7 @@ Copy the external IP and open it in a browser.
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 Username will be `admin`
+
 7. To clone the python-flask-api repository and add secret variables in GitHub Actions, follow these steps:
 Clone the `python-flask-api` repository to your local machine using the Git command:
 ```
