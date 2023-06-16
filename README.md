@@ -82,7 +82,7 @@ kubectl get svc
 ```
 ![WhatsApp Image 2023-06-16 at 8 04 59 PM](https://github.com/aadilraza339/python-flask-api/assets/47937273/192ea645-6e50-4390-9491-d6b4e15a477d)
 
-Boom! Now we can access our Python application.
+Boom! 🎉 Now we can access our Python application.
 Copy this URL and paste it in a browser
 
 
