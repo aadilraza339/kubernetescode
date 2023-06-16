@@ -1,30 +1,65 @@
-## What this does?
-This repo along with https://github.com/saha-rajdeep/kubernetesmanifest creates a Jenkins pipeline with GitOps to deploy code into a Kubernetes cluster. CI part is done via Jenkins and CD part via ArgoCD (GitOps).
+# Deploying to EKS Using GitOps and ArgoCD - Real World Project
 
-## Jenkins installation
-Jenkins is installed on EC2. Follow the instructions on https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/ . You can skip "Configure a Cloud" part for this demo. Please note some commands from this link might give errors, below are the workarounds:
+In this project, we will deploy a simple Python Flask API application using GitOps, ArgoCD, and Kubernetes to deploy it on EKS
 
-1. If you get daemonize error while running the command `sudo yum install jenkins java-1.8.0-openjdk-devel -y` then , run the commands from the answer of https://stackoverflow.com/questions/68806741/how-to-fix-yum-update-of-jenkins
+![image](https://github.com/aadilraza339/python-flask-api/assets/47937273/9f9a5ed1-4d3e-47ae-9d81-8e22cdd192ba)
 
-2. Install Docker on the EC2 after Jenkins is installed by following the instructions on https://serverfault.com/questions/836198/how-to-install-docker-on-aws-ec2-instance-with-ami-ce-ee-update
+### Prerequiresties
+- EKS cluster
+- Argocd 
+- Deployment manifest file
 
-3. Run `sudo chmod 666 /var/run/docker.sock` on the EC2 after Docker is installed.
+Let's start 
 
-4. Install Git on the EC2 by running `sudo yum install git`
+1. We have to create eks cluster.
+```
+ eksctl create cluster
+```
+2. Install Argo CD
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+This will create a new namespace, argocd, where Argo CD services and application resources will live.
 
-### Jenkins plugins
+3. Access The Argo CD API Server
+By default, the Argo CD API server is not exposed with an external IP. To access the API server, expose the Argo CD API server:
+After applying the load balancer, we will obtain an external IP that allows us to access the ArgoCD server and its user interface (UI).
+```
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+5. To obtain the external IP, please paste the following command:
+```
+kubectl get svc argocd-server -n argocd
+```
+Copy the external IP and open it in a browser.
 
-Install the following plugins for the demo.
-- Amazon EC2 plugin (No need to set up Configure Cloud after)
-- Docker plugin  
-- Docker Pipeline
-- GitHub Integration Plugin
-- Parameterized trigger Plugin
+6. To log in to ArgoCD, we need a username and password. Please run the following command to retrieve the credentials
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+Username will be `admin` 
 
-## ArgoCD installation 
+7. Clone `python-flask-deployment` [repository](https://github.com/aadilraza339/python-flask-deployment) and Create Application in argocd.
+```
+kubectl apply -f argocd-application.yaml
+```
+After running this command, our Python application will go live.
 
-Install ArgoCD in your Kubernetes cluster following this link - https://argo-cd.readthedocs.io/en/stable/getting_started/
+8. To open our Python application in a browser, we will need the external IP. Run the following command to obtain the URL:
+```
+kubectl get svc
+```
 
-## How to run!
-Follow along with my Udemy Kubernetes course lectures (GitOps Chapter) to understand how it works, detailed setup instructions, with step by step demo. My highest rated Kubernetes EKS discounted Udemy course link in www.cloudwithraj.com
-# kubernetescode
+Boom! Now we can access our Python application.
+
+9. Let's assume that one of the developers is working on the python-flask-api project. If they want to deploy their changes live, they simply need to follow these steps:
+
+Make the necessary changes in the app.py file within the main branch.
+Run the following commands:
+- git add app.py
+- git commit -m "Update hello_world message"
+- git push
+Now, we need to wait for the application image to build and be pushed live.
+
+After waiting, you can refresh our live application to check if the changes have been successfully deployed or not.
