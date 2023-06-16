@@ -39,9 +39,24 @@ Copy the external IP and open it in a browser.
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
-Username will be `admin` 
+Username will be `admin`
+7. To clone the python-flask-api repository and add secret variables in GitHub Actions, follow these steps:
+Clone the `python-flask-api` repository to your local machine using the Git command:
+```
+git clone <repository_url>
+```
+Replace <repository_url> with the actual URL of the python-flask-api repository.
+- Go to the GitHub website and navigate to the python-flask-api repository.
+- Click on the "Settings" tab located on the right-hand side of the repository page.
+- In the left sidebar, click on "Secrets" under the "Secrets and variables" section.
+- On the Secrets page, click on the "New repository secret" button.
+- In the "Name" field, enter DOCKERHUB_USERNAME.
+- In the "Value" field, enter your Docker Hub username.
+- Click on the "Add secret" button to save the DOCKERHUB_USERNAME secret.
+- Repeat same steps for the DOCKERHUB_TOKEN secret. Use DOCKERHUB_TOKEN as the `name` and your Docker Hub token as the `value`.
+Once you have added both secrets (DOCKERHUB_USERNAME and DOCKERHUB_TOKEN) to the repository, you can use them in your GitHub Actions workflows as needed.
 
-7. Clone `python-flask-deployment` [repository](https://github.com/aadilraza339/python-flask-deployment) and Create Application in argocd.
+8. Clone `python-flask-deployment` [repository](https://github.com/aadilraza339/python-flask-deployment) and Create Application in argocd.
 ```
 kubectl apply -f argocd-application.yaml
 ```
