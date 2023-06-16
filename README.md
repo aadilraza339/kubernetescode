@@ -76,7 +76,7 @@ kubectl apply -f argocd-application.yaml
 ```
 After running this command, our Python application will go live.
 
-8. To open our Python application in a browser, we will need the external IP. Run the following command to obtain the URL:
+9. To open our Python application in a browser, we will need the external IP. Run the following command to obtain the URL:
 ```
 kubectl get svc
 ```
@@ -86,7 +86,7 @@ Boom! Now we can access our Python application.
 Copy this URL and paste it in a browser
 
 
-9. Let's assume that one of the developers is working on the python-flask-api project. If they want to deploy their changes live, they simply need to follow these steps:
+10. Let's assume that one of the developers is working on the python-flask-api project. If they want to deploy their changes live, they simply need to follow these steps:
 
 Make the necessary changes in the app.py file within the main branch.
 Run the following commands:
@@ -96,3 +96,7 @@ Run the following commands:
 Now, we need to wait for the application image to build and be pushed live.
 
 After waiting, you can refresh our live application to check if the changes have been successfully deployed or not.
+
+For a better understanding, you can watch a video tutorial.
+
+### Happy coding :)
