@@ -16,12 +16,16 @@ Let's start
 ```
  eksctl create cluster
 ```
+![image](https://github.com/aadilraza339/python-flask-api/assets/47937273/b507e432-36e7-460c-8ff3-3522e50755fb)
+
 2. Install Argo CD
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 This will create a new namespace, argocd, where Argo CD services and application resources will live.
+![image](https://github.com/aadilraza339/python-flask-api/assets/47937273/fd15a817-63d4-4962-aa71-6f2a3dcffa60)
+
 
 3. Access The Argo CD API Server
 By default, the Argo CD API server is not exposed with an external IP. To access the API server, expose the Argo CD API server:
@@ -29,17 +33,26 @@ After applying the load balancer, we will obtain an external IP that allows us t
 ```
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 ```
+
 5. To obtain the external IP, please paste the following command:
 ```
 kubectl get svc argocd-server -n argocd
 ```
 Copy the external IP and open it in a browser.
 
+![Screenshot from 2023-06-16 19-45-40](https://github.com/aadilraza339/python-flask-api/assets/47937273/8252f762-a467-4996-9e38-5f1e72d8bfb4)
+
+![image](https://github.com/aadilraza339/python-flask-api/assets/47937273/62842584-4f88-4096-9dd8-65dbcb7e1dd1)
+
+
 6. To log in to ArgoCD, we need a username and password. Please run the following command to retrieve the credentials
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
+![WhatsApp Image 2023-06-16 at 7 57 39 PM](https://github.com/aadilraza339/python-flask-api/assets/47937273/72c95df3-b64a-494f-9e73-cf6d21aea5a1)
+
 Username will be `admin`
+
 
 7. To clone the python-flask-api repository and add secret variables in GitHub Actions, follow these steps:
 Clone the `python-flask-api` repository to your local machine using the Git command:
@@ -67,8 +80,11 @@ After running this command, our Python application will go live.
 ```
 kubectl get svc
 ```
+![WhatsApp Image 2023-06-16 at 8 04 59 PM](https://github.com/aadilraza339/python-flask-api/assets/47937273/192ea645-6e50-4390-9491-d6b4e15a477d)
 
 Boom! Now we can access our Python application.
+Copy this URL and paste it in a browser
+
 
 9. Let's assume that one of the developers is working on the python-flask-api project. If they want to deploy their changes live, they simply need to follow these steps:
 
