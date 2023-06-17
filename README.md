@@ -4,7 +4,7 @@ In this project, we will deploy a simple Python Flask API application using GitO
 
 ![image](https://github.com/aadilraza339/python-flask-api/assets/47937273/9f9a5ed1-4d3e-47ae-9d81-8e22cdd192ba)
 
-### Prerequiresties
+### Prerequisites
 - [Docker Hub](https://hub.docker.com/) account To push image on it 
 - EKS cluster
 - Argocd 
@@ -28,7 +28,7 @@ This will create a new namespace, argocd, where Argo CD services and application
 
 
 3. Access The Argo CD API Server
-By default, the Argo CD API server is not exposed with an external IP. To access the API server, expose the Argo CD API server:
+By default, the Argo CD API server is not exposed to an external IP. To access the API server, expose the Argo CD API server:
 After applying the load balancer, we will obtain an external IP that allows us to access the ArgoCD server and its user interface (UI).
 ```
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
@@ -51,7 +51,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 ![WhatsApp Image 2023-06-16 at 7 57 39 PM](https://github.com/aadilraza339/python-flask-api/assets/47937273/72c95df3-b64a-494f-9e73-cf6d21aea5a1)
 
-Username will be `admin`
+The username will be `admin`
 
 
 7. To clone the python-flask-api repository and add secret variables in GitHub Actions, follow these steps:
@@ -67,8 +67,9 @@ Replace <repository_url> with the actual URL of the python-flask-api repository.
 - In the "Name" field, enter DOCKERHUB_USERNAME.
 - In the "Value" field, enter your Docker Hub username.
 - Click on the "Add secret" button to save the DOCKERHUB_USERNAME secret.
-- Repeat same steps for the DOCKERHUB_TOKEN secret. Use DOCKERHUB_TOKEN as the `name` and your Docker Hub token as the `value`.
+- Repeat the same steps for the DOCKERHUB_TOKEN secret. Use DOCKERHUB_TOKEN as the `name` and your Docker Hub token as the `value`.
 - Also add your GitHub token with this key `GH_PAT`
+
 Once you have added secrets (DOCKERHUB_USERNAME, DOCKERHUB_TOKEN, and GH_PAT) to the repository, you can use them in your GitHub Actions workflows as needed.
 
 8. Clone `python-flask-deployment` [repository](https://github.com/aadilraza339/python-flask-deployment) and Create Application in argocd.
@@ -84,7 +85,7 @@ kubectl get svc
 ![WhatsApp Image 2023-06-16 at 8 04 59 PM](https://github.com/aadilraza339/python-flask-api/assets/47937273/192ea645-6e50-4390-9491-d6b4e15a477d)
 
 Boom! 🎉 Now we can access our Python application.
-Copy this URL and paste it in a browser
+Copy this URL and paste it into a browser
 
 
 10. Let's assume that one of the developers is working on the python-flask-api project. If they want to deploy their changes live, they simply need to follow these steps:
