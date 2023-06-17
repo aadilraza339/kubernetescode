@@ -99,6 +99,6 @@ Now, we need to wait for the application image to build and be pushed live.
 
 After waiting, you can refresh our live application to check if the changes have been successfully deployed or not.
 
-For a better understanding, you can watch a video tutorial.
+For a better understanding, you can watch a [video tutorial](https://drive.google.com/file/d/1Be11LysVB8xgzrZHmpbwrAPdPGtYtOrR/view?usp=drive_link).
 
 ### Happy coding :)
