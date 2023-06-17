@@ -68,7 +68,8 @@ Replace <repository_url> with the actual URL of the python-flask-api repository.
 - In the "Value" field, enter your Docker Hub username.
 - Click on the "Add secret" button to save the DOCKERHUB_USERNAME secret.
 - Repeat same steps for the DOCKERHUB_TOKEN secret. Use DOCKERHUB_TOKEN as the `name` and your Docker Hub token as the `value`.
-Once you have added both secrets (DOCKERHUB_USERNAME and DOCKERHUB_TOKEN) to the repository, you can use them in your GitHub Actions workflows as needed.
+- Also add your GitHub token with this key `GH_PAT`
+Once you have added secrets (DOCKERHUB_USERNAME, DOCKERHUB_TOKEN, and GH_PAT) to the repository, you can use them in your GitHub Actions workflows as needed.
 
 8. Clone `python-flask-deployment` [repository](https://github.com/aadilraza339/python-flask-deployment) and Create Application in argocd.
 ```
